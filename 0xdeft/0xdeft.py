@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 
 # Global imports
 import os
@@ -11,7 +12,6 @@ import platform
 
 ## Global Defines
 author = "0xbhoru"
-clearcmd = os.system("clear")
 error_ans = "\n---> Please write the issue code in https://github.com/DrkTheDon/0xdeft/issues <---\n"
 
 
@@ -27,11 +27,12 @@ def init(): ## Init script, check if OS is Linux or other. If !Linux then quit.
             print(f"\nFOUND OS: {platform.platform(terse=True)}")
             time.sleep(1.5)
             os.system("clear")
-    ## >>>>>>>>>> Make the script runnable with one word, e.g 0xdeft instaed of python3 /home/usr/xx/0xdeft/main.py <<<<<<<<<<
     except Exception:
         traceback.print_exc()
         print(error_ans)
         quit()
+def clearcmd():
+    os.system("clear")
 
 
 def art(): # Self explanatory
