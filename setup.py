@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 
 import sys
 import time
@@ -68,7 +69,7 @@ def clearcmd():
 
 def init(): ## Init script, check if OS is Linux or other. If !Linux then quit.
     clearcmd()
-    spin = Spinner("Checking for system compatiblity....", 0.2)
+    spin = Spinner("Checking for system compatiblity.... ", 0.2)
     spin.start()
     time.sleep(1)
     try:
@@ -103,7 +104,7 @@ def check_root():
 
 def download_pkg():
     try:
-
+        make_exec()
         spin = Spinner("Updating.... ", 0.2)
         spin.start()
         os.system("apt-get update >nul 2>&1")
@@ -111,19 +112,39 @@ def download_pkg():
         spin.stop()
         clearcmd()
 
+
         drop_privileges()
         spin = Spinner("Downloading Packages for 0xdeft.... ", 0.2)
         spin.start()
         os.system("pip install --no-cache-dir -r ./0xdeft/requirements.txt ") ## Add >nul 2>&1 after done for no cmd output
         ## Add more shit here
         spin.stop()
+        clearcmd()
 
     except Exception:
         traceback.print_exc()
         print(error_ans)
         quit()
 
+
+def make_exec():
+    spin = Spinner("Making an alias for 0xdeft.... ", 0.2)
+    spin.start()
+    os.system("sudo cp ./0xdeft/0xdeft.py /usr/bin/0xdeft")
+    spin.stop()
+    clearcmd()
+    print("[SUC] 0xdeft is now a command in terminal.")
+    time.sleep(1.5)
+    clearcmd()
+
+def done():
+    print("[SUC] 0xdeft is now installed!")
+    print("[INFO] You can run 0xdeft by writing 0xdeft on terminal.")
+    quit()
+
+
 if __name__ == "__main__":
     check_root()
     init()
     download_pkg()
+    done()
