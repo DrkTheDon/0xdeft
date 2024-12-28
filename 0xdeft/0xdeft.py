@@ -8,11 +8,38 @@ import time
 import traceback # Erorr Message
 import platform
 from pystyle import Colors
-
+import multiprocessing
+# import setup.py (FIND A WAY TO IMPORT SETUP.PY Definitions!!)
 ## Global Defines
 author = "0xbhoru"
 error_ans = "\n---> Please write the issue code in https://github.com/DrkTheDon/0xdeft/issues <---\n"
 
+class Spinner:
+    def __init__(self, message="", speed=0.1) -> None:
+        self.message = message
+        self.speed = speed
+
+        self.process = multiprocessing.Process(target = self.spin, args=(), name = "Spinner")
+
+    def spin(self):
+        spinner = ['-', '\\', '|', '/']
+        n = 0
+        while True:
+            print(f'\r{self.message}{spinner[n]}', end="")
+            n += 1
+            if n >= len(spinner):
+                n = 0
+            time.sleep(self.speed)
+
+    def start(self):
+        self.process.start()
+
+    def stop(self):
+        if not self.process.is_alive():
+            print("[WRN] Spinner is not running.")
+        else:
+            self.process.terminate()
+            print()
 
 def init(): ## Init script, check if OS is Linux or other. If !Linux then quit.
     try:
@@ -40,7 +67,7 @@ def art(): # Self explanatory
    __             __             ___  __      
  /'__`\          /\ \          /'___\/\ \__   
 /\ \/\ \  __  _  \_\ \     __ /\ \__/\ \ ,_\  
-\ \ \ \ \/\ \/'\ /'_` \  /'__`\ \ ,__\\ \ \/  
+\ \ \ \ \/\ \/'\ /'_` \  /'__`\ \ ,__\\ \ \/ 
  \ \ \_\ \/>  <//\ \L\ \/\  __/\ \ \_/ \ \ \_ 
   \ \____//\_/\_\ \___,_\ \____\\ \_\   \ \__\  
    \/___/ \//\/_/\/__,_ /\/____/ \/_/    \/__/
