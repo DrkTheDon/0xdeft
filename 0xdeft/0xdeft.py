@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 # Global imports
 import os
 import sys
@@ -8,7 +7,7 @@ import random
 import time
 import traceback # Erorr Message
 import platform
-
+from pystyle import Colors
 
 ## Global Defines
 author = "0xbhoru"
@@ -31,19 +30,23 @@ def init(): ## Init script, check if OS is Linux or other. If !Linux then quit.
         traceback.print_exc()
         print(error_ans)
         quit()
+
 def clearcmd():
     os.system("clear")
 
 
 def art(): # Self explanatory
     print("""
-  ___          __    _____ 
- / _ \__ _____/ /__ / _/ /_
-/ // /\ \ / _  / -_) _/ __/
-\___//_\_\\_,_/\__/_/ \__/ 
-
-       /* 0xbhnoru */
-""")
+   __             __             ___  __      
+ /'__`\          /\ \          /'___\/\ \__   
+/\ \/\ \  __  _  \_\ \     __ /\ \__/\ \ ,_\  
+\ \ \ \ \/\ \/'\ /'_` \  /'__`\ \ ,__\\ \ \/  
+ \ \ \_\ \/>  <//\ \L\ \/\  __/\ \ \_/ \ \ \_ 
+  \ \____//\_/\_\ \___,_\ \____\\ \_\   \ \__\  
+   \/___/ \//\/_/\/__,_ /\/____/ \/_/    \/__/
+                                              
+                                              
+""", Colors.red_to_blue) ## FIX PYSTYLE BUG !!!
     
 
 
