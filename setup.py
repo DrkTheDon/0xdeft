@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 import sys
 import time
 import threading
@@ -128,14 +127,19 @@ def download_pkg():
 
 
 def make_exec():
-    spin = Spinner("Making an alias for 0xdeft.... ", 0.2)
-    spin.start()
-    os.system("sudo cp ./0xdeft/0xdeft.py /usr/bin/0xdeft")
-    spin.stop()
-    clearcmd()
-    print("[SUC] 0xdeft is now a command in terminal.")
-    time.sleep(1.5)
-    clearcmd()
+    try:
+        spin = Spinner("Making an alias for 0xdeft.... ", 0.2)
+        spin.start()
+        os.system("sudo cp ./0xdeft/0xdeft.py /usr/bin/0xdeft")
+        spin.stop()
+        clearcmd()
+        print("[SUC] 0xdeft is now a command in terminal.")
+        time.sleep(1.5)
+        clearcmd()
+    except Exception:
+        traceback.print_exc()
+        print(error_ans)
+        quit()
 
 def done():
     print("[SUC] 0xdeft is now installed!")
